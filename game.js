@@ -1,11 +1,23 @@
-const options = ["rock", "paper", "scissors"];
-let score = 0;
+let playerScore = 0;
+let computerScore = 0;
 
-function computerPlay() {
-  return options[~~(Math.random() * options.length)];
+function game() {
+  for (let i = 1; i <= 5; i++) playRound(i);
 }
 
-console.log(`Computer threw ${computerPlay()}!`);
+function computerPlay() {
+  const options = ["rock", "paper", "scissors"];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+const playerSelection = window
+  .prompt("rock, paper, or scissors? ")
+  .toLowerCase();
+console.log(`You threw ${playerSelection}`);
+const computerSelection = computerPlay().toLowerCase();
+console.log(`Computer threw ${computerSelection}`);
+// console.log(playRound(playerSelection, computerSelection));
+console.log(`Player Score: ${playerScore}`, `Computer Score: ${computerScore}`);
 
 function playRound(playerSelection, computerSelection) {
   if (computerSelection == playerSelection) {
@@ -15,20 +27,10 @@ function playRound(playerSelection, computerSelection) {
     (computerSelection == "paper" && playerSelection == "rock") ||
     (computerSelection == "scissors" && playerSelection == "paper")
   ) {
+    computerScore += 1;
     return "You lost. The computer is smater.";
-  } else if (
-    (playerSelection == "rock" && computerSelection == "scissors") ||
-    (playerSelection == "paper" && computerSelection == "rock") ||
-    (playerSelection == "scissors" && computerSelection == "paper")
-  ) {
+  } else {
+    playerScore += 1;
     return "You won! Better than a machine I see.";
   }
-}
-
-const playerSelection = window.prompt("rock, paper, or scissors? ");
-const computerSelection = computerPlay();
-console.log(playRound(computerSelection, playerSelection));
-
-function game() {
-  for (let i = 0; i < 5; i++) {}
 }
